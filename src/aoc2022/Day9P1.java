@@ -24,46 +24,42 @@ public class Day9P1 {
             String currentY = headVisited.get(headVisited.size() - 1).split(", ")[1];
             int distance = Integer.parseInt(line.split(" ")[1]);
             switch (direction) {
-                case "D":
-                    for (int j = Integer.parseInt(currentY) - 1; j >= Integer.parseInt(currentY) - distance; j--) {
-                        headVisited.add(currentX + ", " + j);
-                        if (isTouching(tailVisited, headVisited))
-                            tailVisited.add(headVisited.get(headVisited.size() - 2));
-                        if (!tailCount.contains(tailVisited.get(tailVisited.size() - 1)))
-                            tailCount.add(tailVisited.get(tailVisited.size() - 1));
-                    }
-                    break;
                 case "U":
                     for (int j = Integer.parseInt(currentY) + 1; j <= Integer.parseInt(currentY) + distance; j++) {
                         headVisited.add(currentX + ", " + j);
-                        if (isTouching(tailVisited, headVisited))
-                            tailVisited.add(headVisited.get(headVisited.size() - 2));
-                        if (!tailCount.contains(tailVisited.get(tailVisited.size() - 1)))
-                            tailCount.add(tailVisited.get(tailVisited.size() - 1));
+                        findTailOccurrences(headVisited, tailVisited, tailCount);
+                    }
+                    break;
+                case "D":
+                    for (int j = Integer.parseInt(currentY) - 1; j >= Integer.parseInt(currentY) - distance; j--) {
+                        headVisited.add(currentX + ", " + j);
+                        findTailOccurrences(headVisited, tailVisited, tailCount);
                     }
                     break;
                 case "L":
                     for (int j = Integer.parseInt(currentX) - 1; j >= Integer.parseInt(currentX) - distance; j--) {
                         headVisited.add(j + ", " + currentY);
-                        if (isTouching(tailVisited, headVisited))
-                            tailVisited.add(headVisited.get(headVisited.size() - 2));
-                        if (!tailCount.contains(tailVisited.get(tailVisited.size() - 1)))
-                            tailCount.add(tailVisited.get(tailVisited.size() - 1));
+                        findTailOccurrences(headVisited, tailVisited, tailCount);
                     }
                     break;
                 default:
                     for (int j = Integer.parseInt(currentX) + 1; j <= Integer.parseInt(currentX) + distance; j++) {
                         headVisited.add(j + ", " + currentY);
-                        if (isTouching(tailVisited, headVisited))
-                            tailVisited.add(headVisited.get(headVisited.size() - 2));
-                        if (!tailCount.contains(tailVisited.get(tailVisited.size() - 1)))
-                            tailCount.add(tailVisited.get(tailVisited.size() - 1));
+                        findTailOccurrences(headVisited, tailVisited, tailCount);
                     }
                     break;
             }
         }
         System.out.println(tailCount.size());
     }
+
+    private static void findTailOccurrences(List<String> headVisited, List<String> tailVisited, List<String> tailCount) {
+        if (isTouching(tailVisited, headVisited))
+            tailVisited.add(headVisited.get(headVisited.size() - 2));
+        if (!tailCount.contains(tailVisited.get(tailVisited.size() - 1)))
+            tailCount.add(tailVisited.get(tailVisited.size() - 1));
+    }
+
     public static boolean isTouching(List<String> tail, List<String> head) {
         String currentTailX = tail.get(tail.size() - 1).split(", ")[0];
         String currentTailY = tail.get(tail.size() - 1).split(", ")[1];
