@@ -27,9 +27,11 @@ public class Day9P2 {
             String currentX = current.get(current.size() - 1).split(", ")[0];
             String currentY = current.get(current.size() - 1).split(", ")[1];
             int distance = Integer.parseInt(line.split(" ")[1]);
+            int xValue = Integer.parseInt(currentX);
+            int yValue = Integer.parseInt(currentY);
             switch (direction) {
                 case "U":
-                    for (int j = Integer.parseInt(currentY) + 1; j <= Integer.parseInt(currentY) + distance; j++) {
+                    for (int j = yValue + 1; j <= yValue + distance; j++) {
                         rope.get(0).add(currentX + ", " + j);
                         for (int k = 0; k < rope.size() - 1; k++) {
                             if (isTouching(rope.get(k), rope.get(k + 1))) {
@@ -43,7 +45,7 @@ public class Day9P2 {
                     }
                     break;
                 case "D":
-                    for (int j = Integer.parseInt(currentY) - 1; j >= Integer.parseInt(currentY) - distance; j--) {
+                    for (int j = yValue - 1; j >= yValue - distance; j--) {
                         rope.get(0).add(currentX + ", " + j);
                         for (int k = 0; k < rope.size() - 1; k++) {
                             if (isTouching(rope.get(k), rope.get(k + 1))) {
@@ -57,7 +59,7 @@ public class Day9P2 {
                     }
                     break;
                 case "L":
-                    for (int j = Integer.parseInt(currentX) - 1; j >= Integer.parseInt(currentX) - distance; j--) {
+                    for (int j = xValue - 1; j >= xValue - distance; j--) {
                         rope.get(0).add(j + ", " + currentY);
                         for (int k = 0; k < rope.size() - 1; k++) {
                             if (isTouching(rope.get(k), rope.get(k + 1))) {
@@ -71,7 +73,7 @@ public class Day9P2 {
                     }
                     break;
                 default:
-                    for (int j = Integer.parseInt(currentX) + 1; j <= Integer.parseInt(currentX) + distance; j++) {
+                    for (int j = xValue + 1; j <= xValue + distance; j++) {
                         rope.get(0).add(j + ", " + currentY);
                         for (int k = 0; k < rope.size() - 1; k++) {
                             if (isTouching(rope.get(k), rope.get(k + 1))) {
@@ -117,50 +119,28 @@ public class Day9P2 {
     }
 
     public static void moveStraight(List<List<String>> rope, int index) {
-        if (getCurrentX(rope.get(index)).equals(getCurrentX(rope.get(index + 1)))) {
-            if (Integer.parseInt(getCurrentY(rope.get(index))) >
-                    Integer.parseInt(getCurrentY(rope.get(index + 1)))) {
-                rope.get(index + 1).add(Integer.parseInt(getCurrentX(rope.get(index + 1)))
-                        + ", " + (Integer.parseInt(getCurrentY(rope.get(index + 1))) + 1));
-            }
-            else {
-                rope.get(index + 1).add(Integer.parseInt(getCurrentX(rope.get(index + 1)))
-                        + ", " + (Integer.parseInt(getCurrentY(rope.get(index + 1))) - 1));
-            }
+        int currentX = Integer.parseInt(getCurrentX(rope.get(index)));
+        int nextX = Integer.parseInt(getCurrentX(rope.get(index + 1)));
+        int currentY = Integer.parseInt(getCurrentY(rope.get(index)));
+        int nextY = Integer.parseInt(getCurrentY(rope.get(index + 1)));
+        if (currentX == nextX) {
+            if (currentY > nextY) rope.get(index + 1).add(nextX + ", " + (nextY + 1));
+            else rope.get(index + 1).add(nextX + ", " + (nextY - 1));
         }
-        else if (getCurrentY(rope.get(index)).equals(getCurrentY(rope.get(index + 1)))) {
-            if (Integer.parseInt(getCurrentX(rope.get(index))) >
-                    Integer.parseInt(getCurrentX(rope.get(index + 1)))) {
-                rope.get(index + 1).add((Integer.parseInt(getCurrentX(rope.get(index + 1))) + 1)
-                        + ", " + Integer.parseInt(getCurrentY(rope.get(index + 1))));
-            }
-            else {
-                rope.get(index + 1).add((Integer.parseInt(getCurrentX(rope.get(index + 1))) - 1)
-                        + ", " + Integer.parseInt(getCurrentY(rope.get(index + 1))));
-            }
+        else if (currentY == nextY) {
+            if (currentX > nextX) rope.get(index + 1).add((nextX + 1) + ", " + nextY);
+            else rope.get(index + 1).add((nextX - 1) + ", " + nextY);
         }
     }
 
     public static void moveDiagonally(List<List<String>> rope, int index) {
-        if (Integer.parseInt(getCurrentX(rope.get(index))) > Integer.parseInt(getCurrentX(rope.get(index + 1))) &&
-                Integer.parseInt(getCurrentY(rope.get(index))) > Integer.parseInt(getCurrentY(rope.get(index + 1)))) {
-            rope.get(index + 1).add((Integer.parseInt(getCurrentX(rope.get(index + 1))) + 1) + ", " +
-                    (Integer.parseInt(getCurrentY(rope.get(index + 1))) + 1));
-        }
-        else if (Integer.parseInt(getCurrentX(rope.get(index))) < Integer.parseInt(getCurrentX(rope.get(index + 1))) &&
-                Integer.parseInt(getCurrentY(rope.get(index))) > Integer.parseInt(getCurrentY(rope.get(index + 1)))) {
-            rope.get(index + 1).add((Integer.parseInt(getCurrentX(rope.get(index + 1))) - 1) + ", " +
-                    (Integer.parseInt(getCurrentY(rope.get(index + 1))) + 1));
-        }
-        else if (Integer.parseInt(getCurrentX(rope.get(index))) > Integer.parseInt(getCurrentX(rope.get(index + 1))) &&
-                Integer.parseInt(getCurrentY(rope.get(index))) < Integer.parseInt(getCurrentY(rope.get(index + 1)))) {
-            rope.get(index + 1).add((Integer.parseInt(getCurrentX(rope.get(index + 1))) + 1) + ", " +
-                    (Integer.parseInt(getCurrentY(rope.get(index + 1))) - 1));
-        }
-        else if (Integer.parseInt(getCurrentX(rope.get(index))) < Integer.parseInt(getCurrentX(rope.get(index + 1))) &&
-                Integer.parseInt(getCurrentY(rope.get(index))) < Integer.parseInt(getCurrentY(rope.get(index + 1)))) {
-            rope.get(index + 1).add((Integer.parseInt(getCurrentX(rope.get(index + 1))) - 1) + ", " +
-                    (Integer.parseInt(getCurrentY(rope.get(index + 1))) - 1));
-        }
+        int currentX = Integer.parseInt(getCurrentX(rope.get(index)));
+        int nextX = Integer.parseInt(getCurrentX(rope.get(index + 1)));
+        int currentY = Integer.parseInt(getCurrentY(rope.get(index)));
+        int nextY = Integer.parseInt(getCurrentY(rope.get(index + 1)));
+        if (currentX > nextX && currentY > nextY) rope.get(index + 1).add((nextX + 1) + ", " + (nextY + 1));
+        else if (currentX < nextX && currentY > nextY) rope.get(index + 1).add((nextX - 1) + ", " + (nextY + 1));
+        else if (currentX > nextX && currentY < nextY) rope.get(index + 1).add((nextX + 1) + ", " + (nextY - 1));
+        else rope.get(index + 1).add((nextX - 1) + ", " + (nextY - 1));
     }
 }
