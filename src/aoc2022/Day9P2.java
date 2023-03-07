@@ -33,63 +33,44 @@ public class Day9P2 {
                 case "U":
                     for (int j = yValue + 1; j <= yValue + distance; j++) {
                         rope.get(0).add(currentX + ", " + j);
-                        for (int k = 0; k < rope.size() - 1; k++) {
-                            if (isTouching(rope.get(k), rope.get(k + 1))) {
-                                if (isInRowOrColumn(rope.get(k), rope.get(k + 1))) moveDiagonally(rope, k);
-                                else moveStraight(rope, k);
-                            }
-                            else break;
-                        }
-                        String latestPosition = rope.get(9).get(rope.get(9).size() - 1);
-                        if (!tailCount.contains(latestPosition)) tailCount.add(latestPosition);
+                        findTailOccurrences(rope, tailCount);
                     }
                     break;
                 case "D":
                     for (int j = yValue - 1; j >= yValue - distance; j--) {
                         rope.get(0).add(currentX + ", " + j);
-                        for (int k = 0; k < rope.size() - 1; k++) {
-                            if (isTouching(rope.get(k), rope.get(k + 1))) {
-                                if (isInRowOrColumn(rope.get(k), rope.get(k + 1))) moveDiagonally(rope, k);
-                                else moveStraight(rope, k);
-                            }
-                            else break;
-                        }
-                        String latestPosition = rope.get(9).get(rope.get(9).size() - 1);
-                        if (!tailCount.contains(latestPosition)) tailCount.add(latestPosition);
+                        findTailOccurrences(rope, tailCount);
                     }
                     break;
                 case "L":
                     for (int j = xValue - 1; j >= xValue - distance; j--) {
                         rope.get(0).add(j + ", " + currentY);
-                        for (int k = 0; k < rope.size() - 1; k++) {
-                            if (isTouching(rope.get(k), rope.get(k + 1))) {
-                                if (isInRowOrColumn(rope.get(k), rope.get(k + 1))) moveDiagonally(rope, k);
-                                else moveStraight(rope, k);
-                            }
-                            else break;
-                        }
-                        String latestPosition = rope.get(9).get(rope.get(9).size() - 1);
-                        if (!tailCount.contains(latestPosition)) tailCount.add(latestPosition);
+                        findTailOccurrences(rope, tailCount);
                     }
                     break;
                 default:
                     for (int j = xValue + 1; j <= xValue + distance; j++) {
                         rope.get(0).add(j + ", " + currentY);
-                        for (int k = 0; k < rope.size() - 1; k++) {
-                            if (isTouching(rope.get(k), rope.get(k + 1))) {
-                                if (isInRowOrColumn(rope.get(k), rope.get(k + 1))) moveDiagonally(rope, k);
-                                else moveStraight(rope, k);
-                            }
-                            else break;
-                        }
-                        String latestPosition = rope.get(9).get(rope.get(9).size() - 1);
-                        if (!tailCount.contains(latestPosition)) tailCount.add(latestPosition);
+                        findTailOccurrences(rope, tailCount);
                     }
                     break;
             }
         }
         System.out.println(tailCount.size());
     }
+
+    private static void findTailOccurrences(List<List<String>> rope, List<String> tailCount) {
+        for (int k = 0; k < rope.size() - 1; k++) {
+            if (isTouching(rope.get(k), rope.get(k + 1))) {
+                if (isInRowOrColumn(rope.get(k), rope.get(k + 1))) moveDiagonally(rope, k);
+                else moveStraight(rope, k);
+            }
+            else break;
+        }
+        String latestPosition = rope.get(9).get(rope.get(9).size() - 1);
+        if (!tailCount.contains(latestPosition)) tailCount.add(latestPosition);
+    }
+
     public static boolean isTouching(List<String> previous, List<String> next) {
         String currentTailX = previous.get(previous.size() - 1).split(", ")[0];
         String currentTailY = previous.get(previous.size() - 1).split(", ")[1];
