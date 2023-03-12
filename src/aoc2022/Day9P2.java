@@ -29,31 +29,26 @@ public class Day9P2 {
             int distance = Integer.parseInt(line.split(" ")[1]);
             int xValue = Integer.parseInt(currentX);
             int yValue = Integer.parseInt(currentY);
-            switch (direction) {
-                case "U":
-                    for (int j = yValue + 1; j <= yValue + distance; j++) {
-                        rope.get(0).add(currentX + ", " + j);
-                        findTailOccurrences(rope, tailCount);
+            for (int i = 0; i < distance; i++) {
+                switch (direction) {
+                    case "U" -> {
+                        rope.get(0).add(xValue + ", " + (yValue + 1));
+                        yValue++;
                     }
-                    break;
-                case "D":
-                    for (int j = yValue - 1; j >= yValue - distance; j--) {
-                        rope.get(0).add(currentX + ", " + j);
-                        findTailOccurrences(rope, tailCount);
+                    case "D" -> {
+                        rope.get(0).add(xValue + ", " + (yValue - 1));
+                        yValue--;
                     }
-                    break;
-                case "L":
-                    for (int j = xValue - 1; j >= xValue - distance; j--) {
-                        rope.get(0).add(j + ", " + currentY);
-                        findTailOccurrences(rope, tailCount);
+                    case "L" -> {
+                        rope.get(0).add((xValue - 1) + ", " + yValue);
+                        xValue--;
                     }
-                    break;
-                default:
-                    for (int j = xValue + 1; j <= xValue + distance; j++) {
-                        rope.get(0).add(j + ", " + currentY);
-                        findTailOccurrences(rope, tailCount);
+                    default -> {
+                        rope.get(0).add((xValue + 1) + ", " + yValue);
+                        xValue++;
                     }
-                    break;
+                }
+                findTailOccurrences(rope, tailCount);
             }
         }
         System.out.println(tailCount.size());
