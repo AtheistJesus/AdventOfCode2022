@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Day5P2 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day5.txt";
 
     public static void main(String[] args) throws IOException {
         String lines = Files.readString(Path.of(PATHNAME));
@@ -63,6 +63,13 @@ public class Day5P2 {
         for (int i = 0; i < rowList.size(); i++) {
             for (int j = 0; j < rows[i].length(); j += 4) {
                 rowList.get(i).add(rows[i].charAt(j+1));
+            }
+        }
+        for (List<Character> characters : rowList) {
+            if (characters.size() < 9) {
+                for (int j = characters.size(); j < 9; j++) {
+                    characters.add(' ');
+                }
             }
         }
     }
