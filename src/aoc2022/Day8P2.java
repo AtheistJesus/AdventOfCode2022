@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Day8P2 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day8.txt";
     public static int highScore = 0;
 
     public static void main(String[] args) throws IOException {

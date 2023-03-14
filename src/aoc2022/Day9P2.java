@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Day9P2 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day9.txt";
 
     public static void main(String[] args) throws IOException {
         List<String> lines = Files.readAllLines(Path.of(PATHNAME));

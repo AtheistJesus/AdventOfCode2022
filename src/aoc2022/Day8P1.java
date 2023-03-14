@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Day8P1 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day8.txt";
     public static int visible = 0;
 
     public static void main(String[] args) throws IOException {

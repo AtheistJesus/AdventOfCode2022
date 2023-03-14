@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Day4P1 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day4.txt";
 
     public static int overlapping = 0;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Day9P1 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day9.txt";
 
     public static void main(String[] args) throws IOException {
         List<String> lines = Files.readAllLines(Path.of(PATHNAME));
@@ -22,32 +22,29 @@ public class Day9P1 {
             String direction = line.split(" ")[0];
             String currentX = headVisited.get(headVisited.size() - 1).split(", ")[0];
             String currentY = headVisited.get(headVisited.size() - 1).split(", ")[1];
+            int xValue = Integer.parseInt(currentX);
+            int yValue = Integer.parseInt(currentY);
             int distance = Integer.parseInt(line.split(" ")[1]);
-            switch (direction) {
-                case "U":
-                    for (int j = Integer.parseInt(currentY) + 1; j <= Integer.parseInt(currentY) + distance; j++) {
-                        headVisited.add(currentX + ", " + j);
-                        findTailOccurrences(headVisited, tailVisited, tailCount);
+            for (int i = 0; i < distance; i++) {
+                switch (direction) {
+                    case "U" -> {
+                        headVisited.add(xValue + ", " + (yValue + 1));
+                        yValue++;
                     }
-                    break;
-                case "D":
-                    for (int j = Integer.parseInt(currentY) - 1; j >= Integer.parseInt(currentY) - distance; j--) {
-                        headVisited.add(currentX + ", " + j);
-                        findTailOccurrences(headVisited, tailVisited, tailCount);
+                    case "D" -> {
+                        headVisited.add(xValue + ", " + (yValue - 1));
+                        yValue--;
                     }
-                    break;
-                case "L":
-                    for (int j = Integer.parseInt(currentX) - 1; j >= Integer.parseInt(currentX) - distance; j--) {
-                        headVisited.add(j + ", " + currentY);
-                        findTailOccurrences(headVisited, tailVisited, tailCount);
+                    case "L" -> {
+                        headVisited.add((xValue - 1) + ", " + yValue);
+                        xValue--;
                     }
-                    break;
-                default:
-                    for (int j = Integer.parseInt(currentX) + 1; j <= Integer.parseInt(currentX) + distance; j++) {
-                        headVisited.add(j + ", " + currentY);
-                        findTailOccurrences(headVisited, tailVisited, tailCount);
+                    default -> {
+                        headVisited.add((xValue + 1) + ", " + yValue);
+                        xValue++;
                     }
-                    break;
+                }
+                findTailOccurrences(headVisited, tailVisited, tailCount);
             }
         }
         System.out.println(tailCount.size());

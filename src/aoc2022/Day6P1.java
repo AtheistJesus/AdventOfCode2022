@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 public class Day6P1 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day6.txt";
 
     public static void main(String[] args) throws IOException {
         String lines = Files.readString(Path.of(PATHNAME));

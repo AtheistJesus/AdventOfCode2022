@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Day3P2 {
 
-    public static final String PATHNAME = "C:\\Users\\Damian\\Documents\\Numbers.txt";
+    public static final String PATHNAME = "inputs\\day3.txt";
 
     public static int totalPriority = 0;
 
