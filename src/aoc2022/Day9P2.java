@@ -21,8 +21,8 @@ public class Day9P2 {
         for (String line : lines) {
             String direction = line.split(" ")[0];
             String current = rope[0];
-            String currentX = current.split(", ")[0];
-            String currentY = current.split(", ")[1];
+            String currentX = getCurrentX(current);
+            String currentY = getCurrentY(current);
             int distance = Integer.parseInt(line.split(" ")[1]);
             int xValue = Integer.parseInt(currentX);
             int yValue = Integer.parseInt(currentY);
@@ -53,20 +53,20 @@ public class Day9P2 {
     }
 
     public static boolean isTouching(String previous, String next) {
-        String currentTailX = previous.split(", ")[0];
-        String currentTailY = previous.split(", ")[1];
-        String currentHeadX = next.split(", ")[0];
-        String currentHeadY = next.split(", ")[1];
+        String currentTailX = getCurrentX(previous);
+        String currentTailY = getCurrentY(previous);
+        String currentHeadX = getCurrentX(next);
+        String currentHeadY = getCurrentY(next);
         int headMinusTailX = Integer.parseInt(currentHeadX) - Integer.parseInt(currentTailX);
         int headMinusTailY = Integer.parseInt(currentHeadY) - Integer.parseInt(currentTailY);
         return Math.abs(headMinusTailX) > 1 || Math.abs(headMinusTailY) > 1;
     }
 
     public static boolean isInRowOrColumn(String previous, String next) {
-        String currentTailX = previous.split(", ")[0];
-        String currentTailY = previous.split(", ")[1];
-        String currentHeadX = next.split(", ")[0];
-        String currentHeadY = next.split(", ")[1];
+        String currentTailX = getCurrentX(previous);
+        String currentTailY = getCurrentY(previous);
+        String currentHeadX = getCurrentX(next);
+        String currentHeadY = getCurrentY(next);
         int headMinusTailX = Integer.parseInt(currentHeadX) - Integer.parseInt(currentTailX);
         int headMinusTailY = Integer.parseInt(currentHeadY) - Integer.parseInt(currentTailY);
         return headMinusTailX != 0 && headMinusTailY != 0;

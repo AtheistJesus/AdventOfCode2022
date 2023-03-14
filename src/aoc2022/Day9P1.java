@@ -27,23 +27,12 @@ public class Day9P1 {
             int distance = Integer.parseInt(line.split(" ")[1]);
             for (int i = 0; i < distance; i++) {
                 switch (direction) {
-                    case "U" -> {
-                        headVisited.add(xValue + ", " + (yValue + 1));
-                        yValue++;
-                    }
-                    case "D" -> {
-                        headVisited.add(xValue + ", " + (yValue - 1));
-                        yValue--;
-                    }
-                    case "L" -> {
-                        headVisited.add((xValue - 1) + ", " + yValue);
-                        xValue--;
-                    }
-                    default -> {
-                        headVisited.add((xValue + 1) + ", " + yValue);
-                        xValue++;
-                    }
+                    case "U" -> yValue++;
+                    case "D" -> yValue--;
+                    case "L" -> xValue--;
+                    default -> xValue++;
                 }
+                headVisited.add(xValue + ", " + yValue);
                 findTailOccurrences(headVisited, tailVisited, tailCount);
             }
         }
