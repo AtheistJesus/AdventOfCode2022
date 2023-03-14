@@ -28,23 +28,12 @@ public class Day9P2 {
             int yValue = Integer.parseInt(currentY);
             for (int i = 0; i < distance; i++) {
                 switch (direction) {
-                    case "U" -> {
-                        rope[0] = (xValue + ", " + (yValue + 1));
-                        yValue++;
-                    }
-                    case "D" -> {
-                        rope[0] = (xValue + ", " + (yValue - 1));
-                        yValue--;
-                    }
-                    case "L" -> {
-                        rope[0] = ((xValue - 1) + ", " + yValue);
-                        xValue--;
-                    }
-                    default -> {
-                        rope[0] = ((xValue + 1) + ", " + yValue);
-                        xValue++;
-                    }
+                    case "U" -> yValue++;
+                    case "D" -> yValue--;
+                    case "L" -> xValue--;
+                    default -> xValue++;
                 }
+                rope[0] = (xValue + ", " + yValue);
                 findTailOccurrences(rope, tailCount);
             }
         }
