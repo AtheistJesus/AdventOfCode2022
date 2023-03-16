@@ -3,7 +3,7 @@ package aoc2022;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Day9P2 {
@@ -13,7 +13,7 @@ public class Day9P2 {
     public static void main(String[] args) throws IOException {
         List<String> lines = Files.readAllLines(Path.of(PATHNAME));
         String[] rope = new String[10];
-        List<String> tailCount = new ArrayList<>();
+        HashSet<String> tailCount = new HashSet<>();
         tailCount.add("0, 0");
         for (int i = 0; i < 10; i++) {
             rope[i] = ("0, 0");
@@ -40,7 +40,7 @@ public class Day9P2 {
         System.out.println(tailCount.size());
     }
 
-    private static void findTailOccurrences(String[] rope, List<String> tailCount) {
+    private static void findTailOccurrences(String[] rope, HashSet<String> tailCount) {
         for (int k = 0; k < rope.length - 1; k++) {
             if (isTouching(rope[k], rope[k + 1])) {
                 if (isInRowOrColumn(rope[k], rope[k + 1])) moveDiagonally(rope, k);
@@ -49,7 +49,7 @@ public class Day9P2 {
             else break;
         }
         String latestPosition = rope[9];
-        if (!tailCount.contains(latestPosition)) tailCount.add(latestPosition);
+        tailCount.add(latestPosition);
     }
 
     public static boolean isTouching(String previous, String next) {
