@@ -10,7 +10,6 @@ import java.util.Map;
 public class Day10P1 {
 
     public static final String PATHNAME = "inputs\\day10.txt";
-
     public static int cycle = 1, value = 1;
 
     public static void main(String[] args) throws IOException {
