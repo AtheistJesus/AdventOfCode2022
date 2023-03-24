@@ -17,7 +17,6 @@ public class Day10P2 {
         for (int i = 0; i < 6; i++) {
             pixels.add("");
         }
-
         for (String line : lines) {
             if (line.startsWith("addx")) {
                 addPixel();
