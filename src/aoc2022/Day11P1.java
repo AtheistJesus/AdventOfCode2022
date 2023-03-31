@@ -43,14 +43,14 @@ public class Day11P1 {
                         currentItems.get(firstMonkey).add(item);
                         if (round != 19) monkeys[firstMonkey]++;
                         else {
-                            if (i / 7 - 1 < firstMonkey) monkeys[firstMonkey]++;
+                            if (currentMonkey < firstMonkey) monkeys[firstMonkey]++;
                         }
                     }
                     else {
                         currentItems.get(secondMonkey).add(item);
                         if (round != 19) monkeys[secondMonkey]++;
                         else {
-                            if (i / 7 - 1 < secondMonkey) monkeys[secondMonkey]++;
+                            if (currentMonkey < secondMonkey) monkeys[secondMonkey]++;
                         }
                     }
                 }
