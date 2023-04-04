@@ -14,7 +14,7 @@ public class Day11P1 {
     public static void main(String[] args) throws IOException {
         List<String> lines = Files.readAllLines(Path.of(PATHNAME));
         int monkeyCount = 0;
-        for (int i = 0; i < lines.size(); i+= 7) monkeyCount++;
+        for (int i = 0; i < lines.size(); i += 7) monkeyCount++;
         int[] monkeys = new int[monkeyCount];
         List<List<Integer>> currentItems = new ArrayList<>();
         for (int i = 0; i < monkeyCount; i++) {
